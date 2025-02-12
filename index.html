@@ -7,6 +7,47 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
         
+        @media (max-width: 480px) {
+            .content-box {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .blessing {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                margin-top: 1.5rem;
+            }
+
+            .signature {
+                font-size: 1.3rem;
+                margin-top: 1.5rem;
+            }
+
+            input {
+                width: 90%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+
+            button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .blessing {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +58,7 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(45deg, #000428, #004e92);
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
             color: white;
             overflow: hidden;
         }
@@ -33,14 +74,14 @@
         }
 
         .content-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
             width: 90%;
             max-width: 500px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 78, 146, 0.3);
+            box-shadow: 0 0 30px rgba(255, 75, 138, 0.3);
         }
 
         h1 {
@@ -78,7 +119,7 @@
             padding: 1rem 2rem;
             border: none;
             border-radius: 25px;
-            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            background: linear-gradient(45deg, #ff4b8a, #ff7eb3);
             color: white;
             font-size: 1.1rem;
             cursor: pointer;
