@@ -288,24 +288,18 @@
 
         // Particle effect
         function createParticles() {
-            const emojis = ['❤️', '✨', '💖', '💝', '💕'];
             setInterval(() => {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.innerHTML = ['❤️', '✨', '💖', '💝', '💕'][Math.floor(Math.random() * 5)];
                 particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = '-20px';
                 particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
                 particle.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
-                particle.style.position = 'fixed';
-                particle.style.top = '0';
-                particle.style.zIndex = '1000';
                 document.body.appendChild(particle);
 
-                // Remove the particle after animation completes
-                particle.addEventListener('animationend', () => {
-                    particle.remove();
-                });
-            }, 200);
+                setTimeout(() => particle.remove(), 5000);
+            }, 300);
         }
 
         // Allow Enter key
