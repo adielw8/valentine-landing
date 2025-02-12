@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ברכה מיוחדת</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .password-section {
+            margin-bottom: 2rem;
+        }
+
+        input {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 25px;
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            background: #ff1493;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.visible {
+            display: block;
+            animation: fadeIn 1s;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .blessing {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="password-section" id="passwordSection">
+            <h1>ברוכים הבאים 💝</h1>
+            <input type="password" id="passwordInput" placeholder="הכנס סיסמה" />
+            <button onclick="checkPassword()">כניסה</button>
+        </div>
+        
+        <div class="content" id="mainContent">
+            <h1>אהובה שלי</h1>
+            <div class="blessing">
+                את האור בחיי,<br>
+                הנשמה שלי והלב שלי.<br>
+                כל יום איתך הוא מתנה,<br>
+                כל רגע איתך הוא אושר.<br>
+                את המלאך שלי,<br>
+                האהבה היחידה שלי.<br><br>
+                אוהב אותך יותר מכל דבר בעולם,<br>
+                תמיד שלך ❤️<br>
+                גונבי
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === 'אוהב אותך') {
+                document.getElementById('passwordSection').style.display = 'none';
+                document.getElementById('mainContent').classList.add('visible');
+                createHearts();
+            } else {
+                alert('סיסמה שגויה. נסה שוב!');
+            }
+        }
+
+        function createHearts() {
+            const hearts = document.createElement('div');
+            hearts.className = 'hearts';
+            document.body.appendChild(hearts);
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-20px';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+                hearts.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Allow Enter key to submit password
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
