@@ -274,9 +274,24 @@
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             if (password === 'love') {
-                document.getElementById('passwordSection').style.display = 'none';
-                document.getElementById('mainContent').classList.add('visible');
-                createParticles();
+                const passwordSection = document.getElementById('passwordSection');
+                const mainContent = document.getElementById('mainContent');
+                
+                // Fade out password section
+                passwordSection.style.opacity = '0';
+                passwordSection.style.transition = 'opacity 0.5s';
+                
+                // After fade out, hide password section and show main content
+                setTimeout(() => {
+                    passwordSection.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    
+                    // Trigger fade in for main content
+                    setTimeout(() => {
+                        mainContent.classList.add('visible');
+                        createParticles();
+                    }, 50);
+                }, 500);
             } else {
                 alert('סיסמה שגויה. נסה שוב!');
                 shakeElement(document.getElementById('passwordInput'));
