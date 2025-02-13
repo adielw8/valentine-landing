@@ -7,47 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
         
-        @media (max-width: 480px) {
-            .content-box {
-                padding: 1.5rem;
-                width: 95%;
-            }
-
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-            }
-
-            .blessing {
-                font-size: 1.1rem;
-                line-height: 1.6;
-                margin-top: 1.5rem;
-            }
-
-            .signature {
-                font-size: 1.3rem;
-                margin-top: 1.5rem;
-            }
-
-            input {
-                width: 90%;
-                padding: 0.8rem;
-                font-size: 1rem;
-            }
-
-            button {
-                padding: 0.8rem 1.8rem;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-height: 700px) {
-            .blessing {
-                font-size: 1rem;
-                line-height: 1.4;
-            }
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -60,11 +19,10 @@
             min-height: 100vh;
             background: linear-gradient(45deg, #ff758c, #ff7eb3);
             color: white;
-            overflow: hidden;
         }
 
         .container {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -79,9 +37,26 @@
             border-radius: 20px;
             padding: 2rem;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
             box-shadow: 0 0 30px rgba(255, 75, 138, 0.3);
+        }
+
+        .password-section {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .code-hint {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            direction: ltr;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
         }
 
         h1 {
@@ -138,7 +113,7 @@
         .blessing {
             font-size: 1.3rem;
             line-height: 1.8;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
 
         .signature {
@@ -171,34 +146,48 @@
             }
         }
 
-        .stars {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
+        .hint-button {
+            background: transparent;
+            border: 1px solid white;
+            margin: 10px;
+            font-size: 0.9rem;
         }
 
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle linear infinite;
-        }
+        @media (max-width: 480px) {
+            .content-box {
+                padding: 1.5rem;
+                width: 95%;
+            }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
     <div class="container">
         <div class="content-box">
             <div id="passwordSection">
-                <h1>✨ ברוכים הבאים ✨</h1>
-                <input type="password" id="passwordInput" placeholder="הכנס סיסמה" autocomplete="off" />
+                <h1>✨ ברוכה הבאה ✨</h1>
+                <p>היי מתכנתת מוכשרת! 👩‍💻<br>בתור fullstack developer, אני בטוח שתוכלי לפתור את החידה הבאה:</p>
+                
+                <div class="code-hint">
+const message = "I love you";
+const key = message
+    .split('')
+    .filter(char => char !== ' ')
+    .map(char => char.toLowerCase())
+    .slice(0, 4)
+    .join('');
+console.log(key); // This is your password!</div>
+                
+                <div style="margin: 20px 0;">
+                    <button class="hint-button" onclick="showHint(1)">רמז 1 🤔</button>
+                    <button class="hint-button" onclick="showHint(2)">רמז 2 🤓</button>
+                </div>
+
+                <input type="password" id="passwordInput" placeholder="הכניסי את הפתרון" autocomplete="off" />
                 <button onclick="tryPassword()">כניסה</button>
             </div>
             
@@ -216,32 +205,32 @@
                     אוהב אותך יותר מכל דבר בעולם,<br>
                     ואוהב אותך יותר עם כל יום שעובר.<br>
                 </div>
+
+                <div style="margin: 30px 0;">
+                    <a href="https://html-preview.github.io/?url=https://github.com/adielw8/valentine-landing/blob/main/present.html" 
+                       target="_blank"
+                       style="display: inline-block;
+                              padding: 15px 30px;
+                              background: linear-gradient(45deg, #ff4b8a, #ff7eb3);
+                              color: white;
+                              text-decoration: none;
+                              border-radius: 25px;
+                              font-size: 1.2em;
+                              transition: all 0.3s;
+                              box-shadow: 0 4px 15px rgba(255, 75, 138, 0.3);">
+                        💝 יש לי עוד הפתעה בשבילך 💝
+                    </a>
+                </div>
+
                 <div class="signature">
-                    באהבה נצחית,<br>
-                    גונבי ❤️
+                    באהבה נצחית ❤️<br>
+                    שלך תמיד
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Create background stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for(let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.width = star.style.height = Math.random() * 3 + 'px';
-                star.style.animationDuration = Math.random() * 3 + 2 + 's';
-                star.style.animationDelay = Math.random() * 5 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-        createStars();
-
-        // Create emoji animation
         function createEmoji() {
             const emoji = document.createElement('div');
             emoji.className = 'emoji';
@@ -258,20 +247,28 @@
             setInterval(createEmoji, 300);
         }
 
+        function showHint(num) {
+            if (num === 1) {
+                alert('הקוד מורכב מהאותיות הראשונות של המשפט, אחרי הסינון והמניפולציות 🤔');
+            } else {
+                alert('נסי להריץ את הקוד בconsole של הדפדפן ותראי מה הפלט! 💡');
+            }
+        }
+
         function tryPassword() {
             const password = document.getElementById('passwordInput').value.toLowerCase();
-            if (password === 'love') {
+            if (password === 'ilov') {
                 document.getElementById('passwordSection').classList.add('hidden');
                 document.getElementById('mainContent').classList.remove('hidden');
                 startEmojiAnimation();
+                document.body.style.overflow = 'auto';
             } else {
-                alert('סיסמה שגויה. נסה שוב!');
+                alert('לא נכון... נסי שוב! 🤔');
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
             }
         }
 
-        // Handle Enter key
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 tryPassword();
