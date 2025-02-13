@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>הודעה מיוחדת</title>
+    <title>Code Challenge #214</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
         
@@ -42,11 +42,6 @@
             box-shadow: 0 0 30px rgba(255, 75, 138, 0.3);
         }
 
-        .password-section {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
         .code-hint {
             background: rgba(0, 0, 0, 0.3);
             padding: 20px;
@@ -57,6 +52,8 @@
             font-family: monospace;
             white-space: pre;
             overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         h1 {
@@ -106,10 +103,6 @@
             box-shadow: 0 5px 15px rgba(0, 114, 255, 0.3);
         }
 
-        .hidden {
-            display: none;
-        }
-
         .blessing {
             font-size: 1.3rem;
             line-height: 1.8;
@@ -120,6 +113,10 @@
             margin-top: 2rem;
             font-size: 1.5rem;
             color: white;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .emoji {
@@ -146,13 +143,6 @@
             }
         }
 
-        .hint-button {
-            background: transparent;
-            border: 1px solid white;
-            margin: 10px;
-            font-size: 0.9rem;
-        }
-
         @media (max-width: 480px) {
             .content-box {
                 padding: 1.5rem;
@@ -162,6 +152,11 @@
             h1 {
                 font-size: 2rem;
             }
+
+            .code-hint {
+                font-size: 12px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -169,26 +164,31 @@
     <div class="container">
         <div class="content-box">
             <div id="passwordSection">
-                <h1>✨ ברוכה הבאה ✨</h1>
-                <p>היי מתכנתת מוכשרת! 👩‍💻<br>בתור fullstack developer, אני בטוח שתוכלי לפתור את החידה הבאה:</p>
+                <p style="text-align: left; font-family: monospace; margin-bottom: 20px;">
+// Code Challenge #214:
+// Find the hidden key in this snippet
+// Time complexity matters! 🚀</p>
                 
-                <div class="code-hint">
-const message = "I love you";
-const key = message
-    .split('')
-    .filter(char => char !== ' ')
-    .map(char => char.toLowerCase())
-    .slice(0, 4)
-    .join('');
-console.log(key); // This is your password!</div>
-                
-                <div style="margin: 20px 0;">
-                    <button class="hint-button" onclick="showHint(1)">רמז 1 🤔</button>
-                    <button class="hint-button" onclick="showHint(2)">רמז 2 🤓</button>
-                </div>
+                <div class="code-hint">function decode(arr) {
+    const map = new Map([
+        ['<3', 'love'],
+        ['xoxo', 'hugs'],
+        ['143', 'ily']
+    ]);
+    
+    return arr
+        .filter(x => x.length < 4)
+        .map(x => map.get(x) || x)
+        .find(x => x.startsWith('i'))
+        .toLowerCase();
+}
 
-                <input type="password" id="passwordInput" placeholder="הכניסי את הפתרון" autocomplete="off" />
-                <button onclick="tryPassword()">כניסה</button>
+const messages = ['hey', '<3', '143', 'xoxo'];
+const key = decode(messages);
+// key is your password</div>
+                
+                <input type="password" id="passwordInput" placeholder="Enter solution" autocomplete="off" />
+                <button onclick="tryPassword()">Submit</button>
             </div>
             
             <div id="mainContent" class="hidden">
@@ -247,23 +247,14 @@ console.log(key); // This is your password!</div>
             setInterval(createEmoji, 300);
         }
 
-        function showHint(num) {
-            if (num === 1) {
-                alert('הקוד מורכב מהאותיות הראשונות של המשפט, אחרי הסינון והמניפולציות 🤔');
-            } else {
-                alert('נסי להריץ את הקוד בconsole של הדפדפן ותראי מה הפלט! 💡');
-            }
-        }
-
         function tryPassword() {
             const password = document.getElementById('passwordInput').value.toLowerCase();
-            if (password === 'ilov') {
+            if (password === 'ily') {
                 document.getElementById('passwordSection').classList.add('hidden');
                 document.getElementById('mainContent').classList.remove('hidden');
                 startEmojiAnimation();
                 document.body.style.overflow = 'auto';
             } else {
-                alert('לא נכון... נסי שוב! 🤔');
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
             }
